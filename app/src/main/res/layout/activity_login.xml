@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright [2020] [kongpingan]
+  ~
+  ~    Licensed under the Apache License, Version 2.0 (the "License");
+  ~    you may not use this file except in compliance with the License.
+  ~    You may obtain a copy of the License at
+  ~
+  ~        http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~    Unless required by applicable law or agreed to in writing, software
+  ~    distributed under the License is distributed on an "AS IS" BASIS,
+  ~    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~    See the License for the specific language governing permissions and
+  ~    limitations under the License.
+  ~
+  -->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".features.logo.LoginActivity">
+
+
+    <EditText
+        android:id="@+id/userNameEt2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        app:layout_constraintStart_toStartOf="@id/userNameEt"
+        app:layout_constraintTop_toBottomOf="@id/userNameEt"
+        android:layout_marginTop="40dp"
+        android:inputType="textPersonName"
+        tools:layout_editor_absoluteX="149dp"
+        tools:layout_editor_absoluteY="175dp" />
+
+    <TextView
+        android:id="@+id/passwordTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="密码："
+        app:layout_constraintTop_toBottomOf="@id/userNameTv"
+        android:layout_marginTop="70dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="70dp"
+        tools:layout_editor_absoluteX="76dp"
+        tools:layout_editor_absoluteY="194dp" />
+
+    <TextView
+        android:id="@+id/userNameTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="28dp"
+        android:text="用户名："
+        app:layout_constraintEnd_toStartOf="@+id/userNameEt"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteY="109dp" />
+
+    <EditText
+        android:id="@+id/userNameEt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="90dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toEndOf="@id/userNameTv"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="149dp"
+        tools:layout_editor_absoluteY="90dp" />
+
+    <Button
+        android:id="@+id/login"
+        android:layout_width="283dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="200dp"
+        android:text="登录"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/passwordTv"
+        tools:layout_editor_absoluteX="74dp"
+        tools:layout_editor_absoluteY="346dp" />
+
+    <TextView
+        android:id="@+id/registerTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="注册账号"
+        app:layout_constraintStart_toStartOf="@id/login"
+        app:layout_constraintTop_toBottomOf="@id/login"
+        tools:layout_editor_absoluteX="77dp"
+        tools:layout_editor_absoluteY="440dp" />
+
+    <TextView
+        android:id="@+id/forgetTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="忘记密码"
+        app:layout_constraintEnd_toEndOf="@id/login"
+        app:layout_constraintTop_toBottomOf="@id/login"
+        tools:layout_editor_absoluteX="296dp"
+        tools:layout_editor_absoluteY="442dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
