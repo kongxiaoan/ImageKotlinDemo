@@ -18,6 +18,8 @@
 package com.kpa.imagekotlindemo.core.navigation
 
 import android.content.Context
+import android.view.View
+import com.kpa.imagekotlindemo.features.image.ImageActivity
 import com.kpa.imagekotlindemo.features.logo.Authenticator
 import com.kpa.imagekotlindemo.features.logo.LoginActivity
 import javax.inject.Inject
@@ -34,12 +36,13 @@ class Navigator @Inject constructor(private val authenticator: Authenticator) {
 
     fun showMain(context: Context) {
         when (authenticator.userLoggedIn()) {
-            true -> showHome(context)
+            true -> showImage(context)
             false -> showLogin(context)
         }
     }
 
-    private fun showHome(context: Context) {
+    private fun showImage(context: Context) =
+        context.startActivity(ImageActivity.callingIntent(context))
 
-    }
+    class Extras(val transitionSharedElement: View)
 }

@@ -27,7 +27,8 @@ class RouteActivity : AppCompatActivity() {
     private val appComponent: ApplicationComponent by lazy(mode = LazyThreadSafetyMode.NONE) {
         (application as ImageKotlinDemoApplication).appComponent
     }
-    @Inject
+    @Inject // 修改属性 表示该属性需要依赖注入 不能使用private 修饰
+    //internal 修饰类 表示只能在当前moudle 使用
     internal lateinit var navigator: Navigator
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

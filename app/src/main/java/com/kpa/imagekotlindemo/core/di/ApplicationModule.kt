@@ -17,8 +17,16 @@
 
 package com.kpa.imagekotlindemo.core.di
 
+import android.content.Context
+import com.kpa.imagekotlindemo.BuildConfig
 import com.kpa.imagekotlindemo.ImageKotlinDemoApplication
 import dagger.Module
+import dagger.Provides
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Singleton
 
 /**
  *    author : kpa
@@ -26,4 +34,30 @@ import dagger.Module
  */
 @Module
 class ApplicationModule(private val application: ImageKotlinDemoApplication) {
+    @Provides
+    @Singleton
+    fun provideApplicationContext(): Context = application
+
+    @Provides
+    @Singleton
+    fun provideRetrofit(): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl("")
+            .client(createClient())
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
+
+    private fun createClient(): OkHttpClient {
+        val builder = OkHttpClient.Builder()
+        if (BuildConfig.DEBUG) {
+            val loggingInterceptor =
+                HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BASIC)
+            builder.addInterceptor(loggingInterceptor)
+        }
+        return builder.build()
+    }
+
+    @Provides @Singleton fun provideImageRepository() {}
+
 }
