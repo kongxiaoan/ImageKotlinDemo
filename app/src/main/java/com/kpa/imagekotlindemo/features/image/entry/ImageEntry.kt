@@ -17,9 +17,19 @@
 
 package com.kpa.imagekotlindemo.features.image.entry
 
-/**
- *    author : kpa
- *    e-mail : billkp@yeah.net
- */
-class ImageEntry {
+import com.google.gson.annotations.SerializedName
+
+data class ImageEntry(
+    @SerializedName("data")
+    private val imageList: List<Image>,
+    private val page: Int,
+    private val page_count: Int,
+    private val status: Int,
+    private val total_counts: Int
+) {
+    fun toImage() = imageList
+
+    companion object {
+        fun empty() = ImageEntry(arrayListOf(), 0, 0, 0, 0)
+    }
 }

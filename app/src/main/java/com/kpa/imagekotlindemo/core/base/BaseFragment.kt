@@ -22,13 +22,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import com.kpa.imagekotlindemo.ImageKotlinDemoApplication
+import com.kpa.imagekotlindemo.core.di.ApplicationComponent
+import javax.inject.Inject
 
 /**
  *    author : kpa
  *    e-mail : billkp@yeah.net
  */
 abstract class BaseFragment : Fragment() {
+    val appComponent: ApplicationComponent by lazy(LazyThreadSafetyMode.NONE) {
+        (activity?.application as ImageKotlinDemoApplication).appComponent
+    }
 
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

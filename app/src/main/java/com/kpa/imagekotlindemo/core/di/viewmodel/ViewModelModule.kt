@@ -17,7 +17,12 @@
 
 package com.kpa.imagekotlindemo.core.di.viewmodel
 
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import com.kpa.imagekotlindemo.features.image.viewmodel.ImageViewModel
+import dagger.Binds
 import dagger.Module
+import dagger.multibindings.IntoMap
 
 /**
  *    author : kpa
@@ -25,4 +30,11 @@ import dagger.Module
  */
 @Module
 abstract class ViewModelModule {
+    @Binds
+    internal abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ImageViewModel::class)
+    abstract fun bindImageViewModel(imageViewModel: ImageViewModel): ViewModel
 }

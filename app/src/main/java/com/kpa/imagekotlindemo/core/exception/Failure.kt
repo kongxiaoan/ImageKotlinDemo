@@ -20,7 +20,10 @@ package com.kpa.imagekotlindemo.core.exception
 /**
  *    author : kpa
  *    e-mail : billkp@yeah.net
+ *    异常、错误、失败
  */
 sealed class Failure {
-
+    object NetworkConnection : Failure()
+    object ServerError : Failure()
+    abstract class FeatureFailure : Failure()
 }

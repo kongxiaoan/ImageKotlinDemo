@@ -23,21 +23,21 @@ package com.kpa.imagekotlindemo.core.functional
  */
 sealed class Either<out L, out R> {
 
-    data class Left<out L>(val a: L) : Either<L, Nothing>()
+    data class Error<out L>(val a: L) : Either<L, Nothing>()
 
-    data class Right<out R>(val b: R) : Either<Nothing, R>()
+    data class Success<out R>(val b: R) : Either<Nothing, R>()
 
-    val isRight get() = this is Right<R>
+    val isRight get() = this is Success<R>
 
-    val isLeft get() = this is Left<L>
+    val isLeft get() = this is Error<L>
 
-    fun <L> left(a: L) = Left(a)
+    fun <L> left(a: L) = Error(a)
 
-    fun <R> right(b: R) = Right(b)
+    fun <R> right(b: R) = Success(b)
 
     fun fold(fnL: (L) -> Any, fnR: (R) -> Any): Any =
         when(this) {
-            is Left -> fnL(a)
-            is Right -> fnR(b)
+            is Error -> fnL(a)
+            is Success -> fnR(b)
         }
 }

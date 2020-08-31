@@ -22,8 +22,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.kpa.imagekotlindemo.R
 import com.kpa.imagekotlindemo.core.extension.inflate
+import com.kpa.imagekotlindemo.core.extension.loadFromUrl
 import com.kpa.imagekotlindemo.core.navigation.Navigator
+import com.kpa.imagekotlindemo.features.image.entry.Image
 import com.kpa.imagekotlindemo.features.image.entry.ImageEntry
+import kotlinx.android.synthetic.main.ap_item_image.view.*
 import javax.inject.Inject
 import kotlin.properties.Delegates
 
@@ -33,14 +36,17 @@ import kotlin.properties.Delegates
  */
 class ImageAdapter @Inject constructor() : RecyclerView.Adapter<ImageAdapter.ViewHolder>() {
 
-    internal var collection: List<ImageEntry> by Delegates.observable(emptyList()) { _, _, _ ->
+    internal var collection: List<Image> by Delegates.observable(emptyList()) { _, _, _ ->
         notifyDataSetChanged()
     }
-    internal var clickListener: (ImageEntry, Navigator.Extras) -> Unit = { _, _ -> }
+    internal var clickListener: (Image, Navigator.Extras) -> Unit = { _, _ -> }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(imageEntry: ImageEntry, clickListener: (ImageEntry, Navigator.Extras) -> Unit) {
-
+        fun bind(image: Image, clickListener: (Image, Navigator.Extras) -> Unit) {
+            itemView.imagePoster.loadFromUrl(image.url)
+            itemView.setOnClickListener {
+                clickListener(image, Navigator.Extras(itemView.imagePoster))
+            }
         }
     }
 

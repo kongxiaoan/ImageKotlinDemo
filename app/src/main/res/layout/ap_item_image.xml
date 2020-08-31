@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright [2020] [kongpingan]
   ~
   ~    Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,8 +15,21 @@
   ~
   -->
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ImageView
+        android:id="@+id/imagePoster"
+        style="@style/ImagePoster"
+        android:layout_height="180dp" />
+
+    <!-- Used for the ripple effect on touch -->
+    <LinearLayout
+        android:id="@+id/movieHolder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/ripple_effect"
+        android:orientation="horizontal"
+        />
+</androidx.cardview.widget.CardView>

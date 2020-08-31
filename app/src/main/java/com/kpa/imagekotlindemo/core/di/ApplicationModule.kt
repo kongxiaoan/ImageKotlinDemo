@@ -20,6 +20,7 @@ package com.kpa.imagekotlindemo.core.di
 import android.content.Context
 import com.kpa.imagekotlindemo.BuildConfig
 import com.kpa.imagekotlindemo.ImageKotlinDemoApplication
+import com.kpa.imagekotlindemo.features.image.data.repository.ImageRepository
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -42,7 +43,7 @@ class ApplicationModule(private val application: ImageKotlinDemoApplication) {
     @Singleton
     fun provideRetrofit(): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("")
+            .baseUrl("https://gank.io/api/v2/data/category/Girl/type/Girl/")
             .client(createClient())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
@@ -58,6 +59,8 @@ class ApplicationModule(private val application: ImageKotlinDemoApplication) {
         return builder.build()
     }
 
-    @Provides @Singleton fun provideImageRepository() {}
+    @Provides
+    @Singleton
+    fun provideImageRepository(dataSource: ImageRepository.NetWork): ImageRepository = dataSource
 
 }

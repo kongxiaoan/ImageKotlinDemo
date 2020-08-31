@@ -20,6 +20,7 @@ package com.kpa.imagekotlindemo.core.di
 import com.kpa.imagekotlindemo.ImageKotlinDemoApplication
 import com.kpa.imagekotlindemo.core.di.viewmodel.ViewModelModule
 import com.kpa.imagekotlindemo.core.navigation.RouteActivity
+import com.kpa.imagekotlindemo.features.image.ImageFragment
 import dagger.Component
 import javax.inject.Singleton
 
@@ -32,4 +33,5 @@ import javax.inject.Singleton
 interface ApplicationComponent {
     fun inject(application: ImageKotlinDemoApplication)
     fun inject(routeActivity: RouteActivity)
+    fun inject(imageFragment: ImageFragment)
 }

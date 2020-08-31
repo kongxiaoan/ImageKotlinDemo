@@ -17,14 +17,53 @@
 
 package com.kpa.imagekotlindemo.features.image.data.repository
 
+import com.kpa.imagekotlindemo.core.base.NetworkHandler
 import com.kpa.imagekotlindemo.core.exception.Failure
 import com.kpa.imagekotlindemo.core.functional.Either
+import com.kpa.imagekotlindemo.features.image.data.api.ImageService
+import com.kpa.imagekotlindemo.features.image.entry.Image
 import com.kpa.imagekotlindemo.features.image.entry.ImageEntry
+import retrofit2.Call
+import javax.inject.Inject
 
 /**
  *    author : kpa
  *    e-mail : billkp@yeah.net
  */
 interface ImageRepository {
-    fun images(): Either<Failure, List<ImageEntry>>
+    fun images(page: Int, size: Int): Either<Failure, ImageEntry>
+
+    class NetWork @Inject constructor(
+        private val networkHandler: NetworkHandler,
+        private val imageService: ImageService
+    ) : ImageRepository {
+        override fun images(page: Int, size: Int): Either<Failure, ImageEntry> {
+            return when (networkHandler.isConnected) {
+                true -> request(
+                    imageService.images(page, size),
+                    {
+                        it
+                    },
+                    ImageEntry.empty()
+                )
+                false, null -> Either.Error(Failure.NetworkConnection)
+            }
+        }
+
+        private fun <T, R> request(
+            call: Call<T>,
+            transform: (T) -> R,
+            default: T
+        ): Either<Failure, R> {
+            return try {
+                val response = call.execute()
+                when (response.isSuccessful) {
+                    true -> Either.Success(transform((response.body() ?: default)))
+                    false -> Either.Error(Failure.ServerError)
+                }
+            } catch (e: Throwable) {
+                Either.Error(Failure.ServerError)
+            }
+        }
+    }
 }

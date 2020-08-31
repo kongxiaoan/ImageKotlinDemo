@@ -1,2 +1,3 @@
+include ':dagger2inject'
 include ':app'
 rootProject.name = "ImageKotlinDemo"

@@ -17,12 +17,12 @@
 
 package com.kpa.imagekotlindemo.features.image.viewmodel
 
-import android.media.Image
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.kpa.imagekotlindemo.core.base.BaseViewModel
 import com.kpa.imagekotlindemo.core.interactor.UseCase
 import com.kpa.imagekotlindemo.features.image.data.GetImage
+import com.kpa.imagekotlindemo.features.image.entry.Image
 import com.kpa.imagekotlindemo.features.image.entry.ImageEntry
 import javax.inject.Inject
 
@@ -31,16 +31,14 @@ import javax.inject.Inject
  *    e-mail : billkp@yeah.net
  */
 class ImageViewModel @Inject constructor(private val getImage: GetImage) : BaseViewModel() {
-    private val _image: MutableLiveData<List<ImageEntry>> = MutableLiveData()
-    val image: LiveData<List<ImageEntry>> = _image
+    private val _image: MutableLiveData<List<Image>> = MutableLiveData()
+    val image: LiveData<List<Image>> = _image
 
-    fun loadImage() = getImage(UseCase.None()) {
+    fun loadImage(page: Int, size: Int) = getImage(GetImage.Params(page, size)) {
         it.fold(::handleFailure, ::handleImageList)
     }
 
-    private fun handleImageList(imageEntry: List<ImageEntry>) {
-        _image.value = imageEntry.map {
-            ImageEntry()
-        }
+    private fun handleImageList(imageEntry: ImageEntry) {
+        _image.value = imageEntry.toImage()
     }
 }

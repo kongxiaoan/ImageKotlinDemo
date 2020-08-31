@@ -23,11 +23,16 @@ import com.kpa.imagekotlindemo.core.interactor.UseCase
 import com.kpa.imagekotlindemo.features.image.data.repository.ImageRepository
 import com.kpa.imagekotlindemo.features.image.entry.ImageEntry
 import javax.inject.Inject
+import javax.inject.Singleton
 
 /**
  *    author : kpa
  *    e-mail : billkp@yeah.net
  */
-class GetImage @Inject constructor(private val imageRepository: ImageRepository): UseCase<List<ImageEntry>, UseCase.None>() {
-    override suspend fun run(params: None): Either<Failure, List<ImageEntry>> = imageRepository.images()
+//@Singleton
+class GetImage @Inject constructor(private val imageRepository: ImageRepository) :
+    UseCase<ImageEntry, GetImage.Params>() {
+    override suspend fun run(params: Params): Either<Failure, ImageEntry> = imageRepository.images(params.page, params.size)
+
+    data class Params(val page: Int, val size: Int)
 }

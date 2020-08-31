@@ -26,5 +26,5 @@ import javax.inject.Singleton
  */
 @Singleton
 class Authenticator @Inject constructor() {
-    fun userLoggedIn() = false
+    fun userLoggedIn() = true
 }
