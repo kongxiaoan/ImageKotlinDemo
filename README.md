@@ -1,3 +1,6 @@
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20200902144637579.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMyNjQ4NzMx,size_2,color_FFFFFF,t_70#pic_center)
+
+
 > 依赖注入是面向对象编程的一种设计模式，其目的是为了降低程序耦合，这个耦合就是类之间的依赖引起的。
 
 - 符合单一指责原则以及开闭原则
